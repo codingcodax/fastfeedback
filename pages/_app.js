@@ -1,7 +1,13 @@
-import '../styles/globals.css'
+import AuthContextProvider from "../context/AuthContext";
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
+import "../styles/globals.css";
 
-export default MyApp
+const MyApp = ({ Component, pageProps }) => {
+	return (
+		<AuthContextProvider>
+			<Component {...pageProps} />
+		</AuthContextProvider>
+	);
+};
+
+export default MyApp;
