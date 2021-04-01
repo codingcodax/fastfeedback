@@ -1,8 +1,11 @@
-const Layout = () => {
+import Head from "./Head";
+
+const Layout = ({ children }) => {
 	return (
-		<div>
-			<p>Layout Component</p>
-		</div>
+		<>
+			<Head />
+			{children}
+		</>
 	);
 };
 
