@@ -1,7 +1,7 @@
 import { createContext } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 
-import { auth, signInWithGithub, signOut } from "../lib/firebase";
+import { auth, signInWithGithub, signOut } from "@/lib/firebase";
 
 export const AuthContext = createContext();
 
