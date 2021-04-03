@@ -7,7 +7,7 @@ import theme from "@/styles/theme";
 
 const MyApp = ({ Component, pageProps }) => {
 	return (
-		<ChakraProvider theme={theme}>
+		<ChakraProvider resetCSS theme={theme}>
 			<Layout>
 				<AuthContextProvider>
 					<Component {...pageProps} />
