@@ -1,4 +1,4 @@
-const DashboradShell = () => {
+const DashboardShell = () => {
 	return (
 		<div>
 			<p>DashboardShell</p>
@@ -6,4 +6,4 @@ const DashboradShell = () => {
 	);
 };
 
-export default DashboradShell;
+export default DashboardShell;
