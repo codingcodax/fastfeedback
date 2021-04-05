@@ -13,13 +13,34 @@ import {
 } from '@chakra-ui/modal';
 import { FormControl, FormLabel } from '@chakra-ui/form-control';
 import { Input } from '@chakra-ui/input';
+import { useToast } from '@chakra-ui/react';
 
 import { createSite } from '@/lib/firebase';
 
 const AddSiteModal = ({ freePlan }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { register, handleSubmit } = useForm();
-    const onSubmit = (data) => createSite(data);
+    const toast = useToast();
+
+    const onSubmit = async (data) => {
+        try {
+            await createSite(data);
+            onClose();
+            toast({
+                title: `Add ${data.name} site successfully.`,
+                status: 'success',
+                position: 'bottom-left',
+                duration: 5000,
+                isClosable: true,
+            });
+        } catch (err) {
+            toast({
+                title: `Error adding the site.`,
+                status: 'error',
+                isClosable: true,
+            });
+        }
+    };
 
     const initialRef = useRef();
 
@@ -43,7 +64,7 @@ const AddSiteModal = ({ freePlan }) => {
                     <ModalHeader>Add Site</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody pb={6}>
-                        <FormControl>
+                        <FormControl isRequired>
                             <FormLabel>Name</FormLabel>
                             <Input
                                 ref={initialRef}
@@ -55,7 +76,7 @@ const AddSiteModal = ({ freePlan }) => {
                             />
                         </FormControl>
 
-                        <FormControl mt={4}>
+                        <FormControl mt={4} isRequired>
                             <FormLabel>Link</FormLabel>
                             <Input
                                 placeholder='https://website.com'
