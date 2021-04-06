@@ -1,5 +1,6 @@
-import { useRef } from 'react';
+import { useContext, useRef } from 'react';
 import { useForm } from 'react-hook-form';
+import useSWR, { mutate } from 'swr';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { Button } from '@chakra-ui/button';
 import {
@@ -17,28 +18,54 @@ import { useToast } from '@chakra-ui/react';
 
 import { createSite } from '@/lib/firebase';
 
-const AddSiteModal = ({ freePlan }) => {
+import { AuthContext } from '@/context/AuthContext';
+
+const AddSiteModal = ({ dashboard, freePlan }) => {
+    const { user } = useContext(AuthContext);
     const { isOpen, onOpen, onClose } = useDisclosure();
     const { register, handleSubmit } = useForm();
     const toast = useToast();
 
-    const onSubmit = async (data) => {
+    const onSubmit = async ({ name, link }) => {
         try {
-            await createSite(data);
+            const newSite = { name, link, authorId: user.uid };
+
             onClose();
+            mutate(
+                '/api/sites',
+                async (data) => {
+                    return [
+                        ...data,
+                        {
+                            ...newSite,
+                            createdAt: {
+                                _seconds: Math.round(
+                                    new Date().getTime() / 1000
+                                ),
+                            },
+                        },
+                    ];
+                },
+                false
+            );
+            await createSite(newSite);
             toast({
-                title: `Add ${data.name} site successfully.`,
+                title: `Add ${name} site successfully.`,
                 status: 'success',
                 position: 'bottom-left',
                 duration: 5000,
                 isClosable: true,
             });
+            mutate('/api/sites');
         } catch (err) {
             toast({
                 title: `Error adding the site.`,
                 status: 'error',
+                position: 'bottom-left',
+                duration: 5000,
                 isClosable: true,
             });
+            console.error(err);
         }
     };
 
@@ -46,14 +73,28 @@ const AddSiteModal = ({ freePlan }) => {
 
     return (
         <>
-            <Button
-                onClick={onOpen}
-                variant='solid'
-                size='md'
-                fontWeight='medium'
-            >
-                {freePlan ? 'Upgrade to Starter' : 'Add Your First Site'}
-            </Button>
+            {dashboard ? (
+                <Button
+                    onClick={onOpen}
+                    maxWidth='200px'
+                    color='white'
+                    fontWeight='medium'
+                    backgroundColor='gray.900'
+                    _hover={{ bg: 'gray.700' }}
+                    _active={{ bg: 'gray.800', transform: 'scale(0.95)' }}
+                >
+                    + Add Site
+                </Button>
+            ) : (
+                <Button
+                    onClick={onOpen}
+                    variant='solid'
+                    size='md'
+                    fontWeight='medium'
+                >
+                    {freePlan ? 'Upgrade to Starter' : 'Add Your First Site'}
+                </Button>
+            )}
             <Modal
                 initialFocusRef={initialRef}
                 isOpen={isOpen}
@@ -71,7 +112,7 @@ const AddSiteModal = ({ freePlan }) => {
                                 placeholder='My Site'
                                 {...register('name', {
                                     required: true,
-                                    maxLength: 15,
+                                    maxLength: 25,
                                 })}
                             />
                         </FormControl>
