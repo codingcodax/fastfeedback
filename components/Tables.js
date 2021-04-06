@@ -44,7 +44,7 @@ export const Table = (props) => (
         textAlign='left'
         backgroundColor='white'
         boxShadow='0px 4px 10px rgba(0,0,0,0.05)'
-        borderRadius={8}
+        borderRadius='8px'
         {...props}
     />
 );
