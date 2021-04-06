@@ -12,8 +12,9 @@ import {
 
 import { AuthContext } from '@/context/AuthContext';
 import { LogoIcon } from '@/styles/theme';
+import AddSiteModal from './AddSiteModal';
 
-const DashboardShell = ({ children }) => {
+const DashboardShell = ({ children, data }) => {
     const { user } = useContext(AuthContext);
 
     return (
@@ -46,7 +47,10 @@ const DashboardShell = ({ children }) => {
                             </BreadcrumbLink>
                         </BreadcrumbItem>
                     </Breadcrumb>
-                    <Heading size='2xl'>My Sites</Heading>
+                    <Flex mb={4} justifyContent='space-between'>
+                        <Heading size='2xl'>My Sites</Heading>
+                        {data && <AddSiteModal dashboard />}
+                    </Flex>
                     {children}
                 </Flex>
             </Flex>
