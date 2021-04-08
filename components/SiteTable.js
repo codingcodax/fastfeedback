@@ -1,6 +1,7 @@
+import NextLink from 'next/link';
 import { Box, Link } from '@chakra-ui/layout';
-
 import { Skeleton } from '@chakra-ui/skeleton';
+
 import { Td, Table, Tr, Th } from './Tables';
 
 const SkeletonRow = ({ width }) => (
@@ -43,7 +44,9 @@ const SiteTable = ({ sites }) => (
                         <Td>{site.name}</Td>
                         <Td>{site.link}</Td>
                         <Td>
-                            <Link>View Feedback</Link>
+                            <NextLink href={`/feedback/${site.id}`}>
+                                <Link>View Feedback</Link>
+                            </NextLink>
                         </Td>
                         <Td>
                             {new Date(
