@@ -1,6 +1,6 @@
 import { useContext, useRef } from 'react';
 import { useForm } from 'react-hook-form';
-import useSWR, { mutate } from 'swr';
+import { mutate } from 'swr';
 import { useDisclosure } from '@chakra-ui/hooks';
 import { Button } from '@chakra-ui/button';
 import {
@@ -17,6 +17,7 @@ import { Input } from '@chakra-ui/input';
 import { useToast } from '@chakra-ui/react';
 
 import { createSite } from '@/lib/firebase';
+import { createdAt } from '@/utils/createdAt';
 
 import { AuthContext } from '@/context/AuthContext';
 
@@ -38,11 +39,7 @@ const AddSiteModal = ({ dashboard, freePlan }) => {
                         ...data,
                         {
                             ...newSite,
-                            createdAt: {
-                                _seconds: Math.round(
-                                    new Date().getTime() / 1000
-                                ),
-                            },
+                            createdAt: createdAt(),
                         },
                     ];
                 },
