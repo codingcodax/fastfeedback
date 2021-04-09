@@ -1941,9 +1941,9 @@
   "version" "5.3.1"
 
 "caniuse-lite@^1.0.30001093", "caniuse-lite@^1.0.30001113", "caniuse-lite@^1.0.30001154":
-  "integrity" "sha512-TL1GrS5V6LElbitPazidkBMD9sa448bQDDLrumDqaggmKFcuU2JW1wTOHJPukAcOMtEmLcmDJEzfRrf+GjM0Og=="
-  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001205.tgz"
-  "version" "1.0.30001205"
+  "integrity" "sha512-OE5UE4+nBOro8Dyvv0lfx+SRtfVIOM9uhKqFmJeUbGriqhhStgp1A0OyBpgy3OUF8AhYCT+PVwPC1gMl2ZcQMA=="
+  "resolved" "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001208.tgz"
+  "version" "1.0.30001208"
 
 "chalk@^2.0.0", "chalk@^2.4.2", "chalk@2.4.2":
   "integrity" "sha512-Mti+f9lpJNcwF4tWV8/OrTTtF1gZi+f8FqlyAdouralcFWFQWF2+NgCHShjkCb+IFBLq9buZwE1xckQU4peSuQ=="
@@ -3567,6 +3567,11 @@
   dependencies:
     "merge-stream" "^2.0.0"
     "supports-color" "^6.1.0"
+
+"js-cookie@^2.2.1":
+  "integrity" "sha512-HvdH2LzI/EAZcUwA8+0nKNtWHqS+ZmijLA30RwZA0bo7ToCckjK5MkGhjED9KoRcXO6BaGI3I9UIzSA1FKFPOQ=="
+  "resolved" "https://registry.npmjs.org/js-cookie/-/js-cookie-2.2.1.tgz"
+  "version" "2.2.1"
 
 "js-tokens@^3.0.0 || ^4.0.0", "js-tokens@^4.0.0":
   "integrity" "sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ=="
