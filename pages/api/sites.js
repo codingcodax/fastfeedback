@@ -1,8 +1,11 @@
-import { getSAllSites } from '@/lib/firebase';
+import { getUserSites } from '@/lib/firebase';
+import { auth } from '@/lib/firebase-admin';
 
-export default async (_, res) => {
+export default async ({ headers: { token } }, res) => {
     try {
-        const sites = await getSAllSites();
+        const { uid } = await auth.verifyIdToken(token);
+        console.log(uid);
+        const sites = await getUserSites(uid);
 
         res.status(200).json(sites);
     } catch (err) {
