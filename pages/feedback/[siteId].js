@@ -53,7 +53,7 @@ export const getStaticProps = async ({ params }) => {
 
 const Feedback = ({ feedback }) => {
     const { user } = useContext(AuthContext);
-    const [allFeedback, setAllFeedback] = useState(feedback);
+    const [allFeedback, setAllFeedback] = useState(feedback || []);
     const router = useRouter();
     const { register, handleSubmit } = useForm();
     const toast = useToast();
