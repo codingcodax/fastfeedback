@@ -22,7 +22,7 @@ export const getStaticPaths = async () => {
 
     return {
         paths,
-        fallback: false,
+        fallback: true,
     };
 };
 
@@ -47,6 +47,7 @@ export const getStaticProps = async ({ params }) => {
         props: {
             feedback: feedback.reverse(),
         },
+        revalidate: 1,
     };
 };
 
@@ -56,8 +57,6 @@ const Feedback = ({ feedback }) => {
     const router = useRouter();
     const { register, handleSubmit } = useForm();
     const toast = useToast();
-
-    console.log(feedback);
 
     const onSubmit = async ({ comment }) => {
         try {
