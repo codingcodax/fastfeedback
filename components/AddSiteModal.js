@@ -33,7 +33,7 @@ const AddSiteModal = ({ dashboard, freePlan }) => {
 
             onClose();
             mutate(
-                '/api/sites',
+                ['/api/sites', user.za],
                 async (data) => {
                     return [
                         ...data,
@@ -53,7 +53,7 @@ const AddSiteModal = ({ dashboard, freePlan }) => {
                 duration: 5000,
                 isClosable: true,
             });
-            mutate('/api/sites');
+            mutate(['/api/sites', user.za]);
         } catch (err) {
             toast({
                 title: `Error adding the site.`,
