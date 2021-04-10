@@ -1,5 +1,4 @@
-import { getUserSites } from '@/lib/firebase';
-import { auth } from '@/lib/firebase-admin';
+import { auth, getUserSites } from '@/lib/firebase-admin';
 
 export default async ({ headers: { token } }, res) => {
     try {
