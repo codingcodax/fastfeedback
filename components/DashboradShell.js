@@ -7,10 +7,11 @@ import {
 } from '@chakra-ui/react';
 
 import AddSiteModal from './AddSiteModal';
+import DashboardHeader from './DashboardHeader';
 
-const DashboardShell = ({ children, data }) => {
+const DashboardShell = ({ children, data, breadcrumbLink, heading }) => {
     return (
-        <Flex p={8} height='92vh' backgroundColor='gray.100'>
+        <Flex p={8} minHeight='92vh' backgroundColor='gray.100'>
             <Flex
                 direction='column'
                 justify='flex-start'
@@ -20,17 +21,11 @@ const DashboardShell = ({ children, data }) => {
                 width='100%'
                 maxW='800px'
             >
-                <Breadcrumb mb={2}>
-                    <BreadcrumbItem isCurrentPage>
-                        <BreadcrumbLink color='gray.700' fontSize='sm'>
-                            Sites
-                        </BreadcrumbLink>
-                    </BreadcrumbItem>
-                </Breadcrumb>
-                <Flex mb={4} justifyContent='space-between'>
-                    <Heading size='2xl'>My Sites</Heading>
-                    {data && <AddSiteModal dashboard />}
-                </Flex>
+                <DashboardHeader
+                    heading={heading}
+                    breadcrumbLink={breadcrumbLink}
+                    data={data}
+                />
                 {children}
             </Flex>
         </Flex>
