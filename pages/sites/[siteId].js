@@ -9,8 +9,8 @@ import { useToast } from '@chakra-ui/toast';
 
 import { AuthContext } from '@/context/AuthContext';
 
-import { createFeedback, getSAllSites } from '@/lib/firebase';
-import { getAllFeedback } from '@/lib/firebase-admin';
+import { createFeedback } from '@/lib/firebase';
+import { getFeedback, getSAllSites } from '@/lib/firebase-admin';
 
 import FeedbackItem from '@/components/FeedbackItem';
 
@@ -28,7 +28,7 @@ export const getStaticPaths = async () => {
 
 export const getStaticProps = async ({ params }) => {
     const siteId = params.siteId;
-    const feedback = await getAllFeedback(siteId);
+    const feedback = await getFeedback(siteId);
 
     if (feedback.length) {
         feedback.map(
@@ -62,7 +62,7 @@ const Feedback = ({ feedback }) => {
         try {
             const newFeedback = {
                 author: user.providerData[0].displayName,
-                authorId: user.providerData[0].uid,
+                authorId: user.uid,
                 siteId: router.query.siteId,
                 content: comment,
                 provider: user.providerData[0].providerId,
