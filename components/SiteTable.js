@@ -41,10 +41,10 @@ const SiteTable = ({ sites }) => (
             ) : (
                 sites.map((site) => (
                     <Box key={site.link} as='tr'>
-                        <Td>{site.name}</Td>
+                        <Td fontWeight='medium'>{site.name}</Td>
                         <Td>{site.link}</Td>
                         <Td>
-                            <NextLink href={`/feedback/${site.id}`}>
+                            <NextLink href={`/sites/${site.id}`}>
                                 <Link>View Feedback</Link>
                             </NextLink>
                         </Td>
