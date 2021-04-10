@@ -1,3 +1,4 @@
+import NextLink from 'next/link';
 import { useContext } from 'react';
 import { LogoIcon } from '@/styles/theme';
 import { Avatar } from '@chakra-ui/avatar';
@@ -15,9 +16,17 @@ const Layout = ({ children }) => {
             <Flex flexDirection='column'>
                 <Flex justify='space-between' align='center' py={4} px={8}>
                     <Stack spacing={4} isInline align='center'>
-                        <LogoIcon boxSize='24px' />
-                        <Link>Feedback</Link>
-                        <Link>Sites</Link>
+                        <NextLink href={`${user ? '/sites' : '/'}`}>
+                            <Link>
+                                <LogoIcon boxSize='24px' />
+                            </Link>
+                        </NextLink>
+                        <NextLink href='/sites'>
+                            <Link>Sites</Link>
+                        </NextLink>
+                        <NextLink href='/feedback'>
+                            <Link>Feedback</Link>
+                        </NextLink>
                     </Stack>
                     <Stack
                         spacing={4}
@@ -25,8 +34,11 @@ const Layout = ({ children }) => {
                         justify='flex-end'
                         align='center'
                     >
-                        <Link>Account</Link>
-                        <Avatar size='sm' src={user?.photoURL} />
+                        <NextLink href='/account'>
+                            <Link>
+                                <Avatar size='sm' src={user?.photoURL} />
+                            </Link>
+                        </NextLink>
                     </Stack>
                 </Flex>
                 {children}
