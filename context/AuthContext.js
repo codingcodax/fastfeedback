@@ -1,7 +1,12 @@
 import { createContext } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { auth, signInWithGithub, signOut } from '@/lib/firebase';
+import {
+    auth,
+    signInWithGithub,
+    signInWithGoogle,
+    signOut,
+} from '@/lib/firebase';
 import Cookies from 'js-cookie';
 
 export const AuthContext = createContext();
@@ -11,6 +16,12 @@ const AuthContextProvider = ({ children }) => {
 
     const signInWithGithubContext = () => {
         signInWithGithub();
+        Cookies.set('fast-feedback-auth', true, { expires: 1 });
+    };
+
+    const signInWithGoogleContext = () => {
+        console.log('signed with google');
+        signInWithGoogle();
         Cookies.set('fast-feedback-auth', true, { expires: 1 });
     };
 
@@ -26,6 +37,7 @@ const AuthContextProvider = ({ children }) => {
                 loading,
                 error,
                 signInWithGithubContext,
+                signInWithGoogleContext,
                 signOutContext,
             }}
         >
