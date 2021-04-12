@@ -50,7 +50,7 @@ const SiteTable = ({ sites }) => (
                         </Td>
                         <Td>
                             {new Date(
-                                site.createdAt.seconds * 1000
+                                site.createdAt._seconds * 1000
                             ).toDateString()}
                         </Td>
                     </Box>
