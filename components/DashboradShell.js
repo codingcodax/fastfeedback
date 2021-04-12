@@ -11,7 +11,7 @@ import DashboardHeader from './DashboardHeader';
 
 const DashboardShell = ({ children, data, breadcrumbLink, heading }) => {
     return (
-        <Flex p={8} minHeight='92vh' backgroundColor='gray.100'>
+        <Flex p={8} minHeight='92vh'>
             <Flex
                 direction='column'
                 justify='flex-start'
