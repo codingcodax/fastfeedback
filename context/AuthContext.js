@@ -1,4 +1,5 @@
 import { createContext } from 'react';
+import { useRouter } from 'next/router';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import {
@@ -13,20 +14,25 @@ export const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
     const [user, loading, error] = useAuthState(auth);
+    const router = useRouter();
 
-    const signInWithGithubContext = () => {
-        signInWithGithub();
+    const redirect = (path = '/') => router.push(`${path}`);
+
+    const signInWithGithubContext = async () => {
+        await signInWithGithub();
+        redirect('/sites');
         Cookies.set('fast-feedback-auth', true, { expires: 1 });
     };
 
-    const signInWithGoogleContext = () => {
-        console.log('signed with google');
-        signInWithGoogle();
+    const signInWithGoogleContext = async () => {
+        await signInWithGoogle();
+        redirect('/sites');
         Cookies.set('fast-feedback-auth', true, { expires: 1 });
     };
 
-    const signOutContext = () => {
-        signOut();
+    const signOutContext = async () => {
+        await signOut();
+        redirect();
         Cookies.remove('fast-feedback-auth');
     };
 
