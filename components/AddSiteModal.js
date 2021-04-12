@@ -31,7 +31,6 @@ const AddSiteModal = ({ dashboard, freePlan }) => {
         try {
             const newSite = { name, link, authorId: user.uid };
 
-            onClose();
             mutate(
                 ['/api/sites', user.za],
                 async (data) => {
@@ -46,6 +45,7 @@ const AddSiteModal = ({ dashboard, freePlan }) => {
                 false
             );
             await createSite(newSite);
+            onClose();
             toast({
                 title: `Add ${name} site successfully.`,
                 status: 'success',
