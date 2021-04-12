@@ -1,9 +1,21 @@
 import Head from 'next/head';
+import NextLink from 'next/link';
 import { useContext } from 'react';
-import { Flex, Button, ButtonGroup, Heading, Text } from '@chakra-ui/react';
+import {
+    Flex,
+    Button,
+    ButtonGroup,
+    Heading,
+    Text,
+    Link,
+    Stack,
+} from '@chakra-ui/react';
 
 import { AuthContext } from '@/context/AuthContext';
 import { LogoIcon } from '@/styles/theme';
+
+import SignInWithGithub from '@/components/buttons/SignInWithGithub';
+import SignInWithGoogle from '@/components/buttons/SignInWithGoogle';
 
 const Home = () => {
     const { user, signInWithGithubContext, signOutContext } = useContext(
@@ -16,7 +28,7 @@ const Home = () => {
             direction='column'
             align='center'
             justify='center'
-            h='100vh'
+            minHeight='92vh'
         >
             <Head>
                 <script
@@ -32,10 +44,25 @@ const Home = () => {
 
             <LogoIcon boxSize='64px' />
 
+            <Text mb={4} maxWidth='500px'>
+                <Text fontWeight='bold' display='inline-block'>
+                    Fast Feedback
+                </Text>{' '}
+                is being as part of{' '}
+                <NextLink href='https://react2025.com' passHref>
+                    <Link textDecoration='underline' isExternal>
+                        React 2025
+                    </Link>
+                </NextLink>
+                . It's he easiest way to add comments or reviews to your static
+                site. It's still work-in-progress, but you can try out by
+                logging in
+            </Text>
+
             {!user ? (
-                <Button mt={4} size='sm' onClick={signInWithGithubContext}>
-                    Sign In
-                </Button>
+                <Stack>
+                    <SignInWithGithub /> <SignInWithGoogle />{' '}
+                </Stack>
             ) : (
                 <Button mt={4} size='sm' onClick={signOutContext}>
                     Sign Out
